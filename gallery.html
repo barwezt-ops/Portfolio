@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#08090B" />
 <link rel="canonical" href="https://barwezt-ops.github.io/Portfolio/gallery.html" />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Turki — every ad, in one place" />
+<meta property="og:title" content="Turki — selected work from 50+ AI UGC ads" />
 <meta property="og:description" content="AI UGC and animated ads for Larine, UltimaPeak, The Perfect Jean, Rootless Plants and Southern Fry Kings, each with the brief behind it." />
 <meta property="og:image" content="https://barwezt-ops.github.io/Portfolio/assets/og.jpg" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -275,8 +275,8 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
     <div class="head__glow" aria-hidden="true"></div>
     <div class="wrap" style="position:relative">
       <p class="tag rv head__live"><i></i>Gallery</p>
-      <h1 class="h1 rv">Every ad, in one place.</h1>
-      <p class="lede rv" id="headLede">AI UGC and animated short-form, built for Meta and TikTok. Open any ad to watch the full cut with sound and read the brief behind it.</p>
+      <h1 class="h1 rv">Selected work.</h1>
+      <p class="lede rv" id="headLede">A selection from the 50+ AI UGC and animated ads I&rsquo;ve produced for performance agencies and their brands. Open any ad to watch the full cut with sound and read the brief behind it.</p>
     </div>
   </header>
 
@@ -319,7 +319,6 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
       <div class="vw__nav">
         <button class="vw__btn" id="vwPrev">&larr; Previous</button>
         <button class="vw__btn vw__btn--solid" id="vwNext">Next &rarr;</button>
-        <span class="vw__count" id="vwCount"></span>
       </div>
     </div>
   </div>
@@ -434,7 +433,7 @@ const FILTERS = [
 let filter = 0;
 const chips = document.getElementById('chips');
 chips.innerHTML = FILTERS.map(([label, fn], i) =>
-  `<button class="chip" data-f="${i}" aria-pressed="${i === 0}">${label}<b>${ADS.filter(fn).length}</b></button>`).join('');
+  `<button class="chip" data-f="${i}" aria-pressed="${i === 0}">${label}</button>`).join('');
 chips.addEventListener('click', e => {
   const b = e.target.closest('[data-f]');
   if (!b) return;
@@ -519,8 +518,6 @@ function render(i){
   const specs = [["Vertical", a.vertical], ...a.specs];
   if (!specs.some(s => s[0] === 'Brand')) specs.unshift(["Brand", a.brand]);
   $('vwList').innerHTML = specs.map(([k, v]) => `<li><b>${k}</b><span>${v}</span></li>`).join('');
-  const list = visible(), pos = list.indexOf(i);
-  $('vwCount').textContent = `${pos + 1} / ${list.length}`;
   history.replaceState(null, '', '#' + a.slug);
 }
 function openAd(i, trigger){
