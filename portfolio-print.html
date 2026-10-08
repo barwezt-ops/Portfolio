@@ -104,11 +104,23 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
   background:var(--text);color:var(--bg);transition:opacity .25s var(--ease);
 }
 .nav__cta:hover{opacity:.86}
-.nav__end{display:flex;align-items:center;gap:16px}
-.nav__gal{font-size:14px;font-weight:500;color:var(--text);display:inline-flex;align-items:center;gap:6px}
-.nav__gal::before{content:"";width:6px;height:6px;border-radius:50%;background:#31A24C;box-shadow:0 0 0 3px rgba(49,162,76,.2)}
-.nav__gal:hover{opacity:.8}
-@media(max-width:760px){.nav__mid{display:none}}
+.nav{display:grid;grid-template-columns:1fr auto 1fr}
+.nav__cta{justify-self:end}
+.nav__mid{align-items:center}
+.nav__gal{
+  font-size:14px;font-weight:600;color:var(--text) !important;
+  display:inline-flex;align-items:center;gap:8px;padding:8px 15px;border-radius:999px;
+  background:linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,.06));
+  border:1px solid rgba(255,255,255,.22);
+  box-shadow:0 0 0 4px rgba(49,162,76,.08),0 8px 24px -10px rgba(49,162,76,.55);
+  transition:transform .3s var(--ease),border-color .3s var(--ease),background .3s var(--ease);
+}
+.nav__gal::before{content:"";width:7px;height:7px;border-radius:50%;background:#31A24C;box-shadow:0 0 0 3px rgba(49,162,76,.25)}
+.nav__gal:hover{transform:translateY(-1px);border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.16)}
+@media(max-width:760px){
+  .nav__mid a:not(.nav__gal){display:none}
+  .nav__gal{padding:7px 13px;font-size:13.5px}
+}
 
 /* ══════════════════════════════════════════════════════
    HERO
@@ -125,6 +137,8 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 .hero__meta{
   display:flex;flex-wrap:wrap;gap:10px 12px;margin-top:30px;
 }
+.hero__actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.hero__actions + .hero__meta{margin-top:22px}
 .pill{
   font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;
   color:var(--muted);padding:7px 12px;border-radius:999px;
@@ -531,13 +545,11 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
   <div class="nav__mid">
     <a href="#feeds">In the feed</a>
     <a href="#work">Campaigns</a>
+    <a class="nav__gal" href="gallery.html">Gallery</a>
     <a href="#pipeline">Workflow</a>
     <a href="#testing">Testing</a>
   </div>
-  <div class="nav__end">
-    <a class="nav__gal" href="gallery.html">Gallery</a>
-    <a class="nav__cta" data-contact="email">Work with me</a>
-  </div>
+  <a class="nav__cta" data-contact="email" target="_blank" rel="noopener">Work with me</a>
 </nav>
 
 <main id="top">
@@ -550,6 +562,10 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
       <p class="tag rv">AI UGC · Direct response · Meta &amp; TikTok</p>
       <h1 class="h1 rv">Ads built to be tested, not admired.</h1>
       <p class="lede rv">I&rsquo;m Turki, an AI UGC specialist. I generate the talent, the voice and the b&#8209;roll, then cut them into short-form direct-response creative that ships straight into the ad account.</p>
+      <div class="hero__actions rv">
+        <a class="btn btn--solid" href="gallery.html">Browse the gallery <span aria-hidden="true">&rarr;</span></a>
+        <a class="btn btn--ghost" data-contact="email" target="_blank" rel="noopener">Work with me</a>
+      </div>
       <div class="hero__meta rv">
         <span class="pill">9:16 · 4:5 · 1:1</span>
         <span class="pill">English &amp; Arabic</span>
@@ -800,7 +816,10 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
     <div class="case__grid">
       <div class="rv">
         <div class="case__no">Campaign 03</div>
-        <h3 class="h3">Injury Counsel</h3>
+        <div class="case__brand">
+          <img class="brandmark" src="assets/brands/injurycounsel.png" alt="" width="40" height="40">
+          <h3 class="h3">Injury Counsel</h3>
+        </div>
         <p class="lede">An organic-style talking head that plays like a warning from a friend, not a pitch from a firm. Neck-brace and roadside inserts break up the read, and the captions carry the whole claim with the sound off.</p>
         <ul class="case__list">
           <li><b>Brand</b><span>Injury Counsel</span></li>
@@ -821,7 +840,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
               <div class="ui__title">Reels</div>
               <div class="ui__spacer"></div>
               <div class="ui__foot">
-                <div class="ui__user"><i></i>injurycounsel</div>
+                <div class="ui__user"><i style="background-image:url(assets/brands/injurycounsel.png)"></i>injurycounsel</div>
                 <div class="ui__spon">Sponsored</div>
                 <div class="ui__cta"><span>Learn more</span><span>&rsaquo;</span></div>
               </div>
@@ -875,7 +894,10 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
     <div class="case__grid">
       <div class="rv">
         <div class="case__no">Campaign 05</div>
-        <h3 class="h3">Rootless Plants</h3>
+        <div class="case__brand">
+          <img class="brandmark" src="assets/brands/rootlessplants.png" alt="" width="40" height="40">
+          <h3 class="h3">Rootless Plants</h3>
+        </div>
         <p class="lede">A skeptic&rsquo;s confession from the living room. She opens on the plastic-tree disappointment every shopper fears, then walks the camera into a golden Heritage Maple until you can see the leaf veins and the warm gradient for yourself. The close is one line: just read the reviews. They sold me.</p>
         <ul class="case__list">
           <li><b>Brand</b><span>Rootless Plants</span></li>
@@ -895,7 +917,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
               <div class="ui__title">Reels</div>
               <div class="ui__spacer"></div>
               <div class="ui__foot">
-                <div class="ui__user"><i></i>rootlessplants</div>
+                <div class="ui__user"><i style="background-image:url(assets/brands/rootlessplants.png)"></i>rootlessplants</div>
                 <div class="ui__spon">Sponsored</div>
                 <div class="ui__cta"><span>Shop now</span><span>&rsaquo;</span></div>
               </div>
@@ -911,7 +933,10 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
     <div class="case__grid">
       <div class="rv">
         <div class="case__no">Campaign 06</div>
-        <h3 class="h3">The Perfect Jean</h3>
+        <div class="case__brand">
+          <img class="brandmark" src="assets/brands/theperfectjean.png" alt="" width="40" height="40">
+          <h3 class="h3">The Perfect Jean</h3>
+        </div>
         <p class="lede">The hook is a pain every desk worker knows: nine hours in stiff denim. The proof is a squat at a server rack, then a split-screen of old jeans against The Perfect Jean after a big lunch. Neon size tags run W28 to W52 before the 15% off card closes it.</p>
         <ul class="case__list">
           <li><b>Brand</b><span>The Perfect Jean</span></li>
@@ -930,7 +955,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
               <div class="ui__status"><span>9:41</span><span>▮▮▮</span></div>
               <div class="ui__spacer"></div>
               <div class="ui__foot">
-                <div class="ui__user"><i></i>theperfectjean</div>
+                <div class="ui__user"><i style="background-image:url(assets/brands/theperfectjean.png)"></i>theperfectjean</div>
                 <div class="ui__spon">Sponsored</div>
                 <div class="ui__cta"><span>Shop now</span><span>&rsaquo;</span></div>
               </div>
@@ -946,7 +971,10 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
     <div class="case__grid">
       <div class="rv">
         <div class="case__no">Campaign 07</div>
-        <h3 class="h3">Southern Fry Kings</h3>
+        <div class="case__brand">
+          <img class="brandmark" src="assets/brands/southernfrykings.png" alt="" width="40" height="40">
+          <h3 class="h3">Southern Fry Kings</h3>
+        </div>
         <p class="lede">A food creator who has had enough of viral food hype, so he fries the proof on camera. A rolling pot of oil, a tray of golden chicken and a bite you can almost hear sell the Kings Chicken Original Creole fry batter: seasoned all the way through, with the bag in frame the whole time.</p>
         <ul class="case__list">
           <li><b>Brand</b><span>Southern Fry Kings</span></li>
@@ -966,7 +994,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
               <div class="ui__title">Reels</div>
               <div class="ui__spacer"></div>
               <div class="ui__foot">
-                <div class="ui__user"><i></i>southernfrykings</div>
+                <div class="ui__user"><i style="background-image:url(assets/brands/southernfrykings.png)"></i>southernfrykings</div>
                 <div class="ui__spon">Sponsored</div>
                 <div class="ui__cta"><span>Shop now</span><span>&rsaquo;</span></div>
               </div>
@@ -982,7 +1010,10 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
     <div class="case__grid">
       <div class="rv">
         <div class="case__no">Campaign 08</div>
-        <h3 class="h3">Golden Crunch</h3>
+        <div class="case__brand">
+          <img class="brandmark" src="assets/brands/southernfrykings.png" alt="" width="40" height="40">
+          <h3 class="h3">Golden Crunch</h3>
+        </div>
         <p class="lede">The same Kings Chicken batter, sold as a song. A fully animated jingle where the lyric is the method: coat it, fry it, hear that golden crunch. A raw drumstick turns into a golden pile, the crunch plays in slow motion, and a backyard couple can&rsquo;t hide their reaction before the bag lands on the tray.</p>
         <ul class="case__list">
           <li><b>Brand</b><span>Southern Fry Kings</span></li>
@@ -1001,7 +1032,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
               <div class="ui__status"><span>9:41</span><span>▮▮▮</span></div>
               <div class="ui__spacer"></div>
               <div class="ui__foot">
-                <div class="ui__user"><i></i>southernfrykings</div>
+                <div class="ui__user"><i style="background-image:url(assets/brands/southernfrykings.png)"></i>southernfrykings</div>
                 <div class="ui__spon">Sponsored</div>
                 <div class="ui__cta"><span>Shop now</span><span>&rsaquo;</span></div>
               </div>
@@ -1098,8 +1129,9 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 <section class="wrap end" id="contact">
   <p class="tag rv">Get in touch</p>
   <h2 class="h2 rv">Send the script. I&rsquo;ll build the ad.</h2>
+  <p class="lede rv" style="margin:16px auto 0">Or write to <a href="mailto:barwezt@gmail.com" style="color:var(--text);border-bottom:1px solid var(--line-2)">barwezt@gmail.com</a></p>
   <div class="end__actions rv">
-    <a class="btn btn--solid" data-contact="email">Work with me</a>
+    <a class="btn btn--solid" data-contact="email" target="_blank" rel="noopener">Work with me</a>
     <a class="btn btn--ghost" data-contact="instagram" target="_blank" rel="noopener">DM on Instagram</a>
   </div>
 </section>
@@ -1124,7 +1156,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
        Leave a value as "" to hide that link.
    ════════════════════════════════════════════════════════════ */
 const CONTACT = {
-  email:     "hello@example.com",          // ✏️ your real email
+  email:     "barwezt@gmail.com",
   instagram: "https://instagram.com/",     // ✏️ your real profile
   x:         "",                           // ✏️ optional
   linkedin:  ""                            // ✏️ optional
@@ -1138,26 +1170,26 @@ const LOGOS = {"heygen":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFcAAABcC
 
 const WORK = [
   { title: "UltimaPeak",         tag: "Supplement", logo: "assets/brands/ultimapeak.png", id: "1H5ZwVGR_7hRViW2jNu7W05r12JIm_9nt", brand: "UltimaPeak", cta: "Shop now" },
-  { title: "Injury Counsel",     tag: "Legal",      brand: "Injury Counsel", cta: "Learn more",
+  { title: "Injury Counsel",     tag: "Legal", logo: "assets/brands/injurycounsel.png",      brand: "Injury Counsel", cta: "Learn more",
     poster: "assets/video/injury.jpg",     full: "assets/video/injury-full.mp4" },
   { title: "Nerve Patch",        tag: "Supplement", logo: "assets/brands/mypatches.png", brand: "mypatches",      cta: "Shop now",
     poster: "assets/video/nervepatch-product.jpg", full: "assets/video/nervepatch-full.mp4" },
   { title: "Remineralizing Gum", tag: "Oral care",  logo: "assets/brands/larine.png", brand: "Larine",         cta: "Shop now",
     poster: "assets/video/larine.jpg",     full: "assets/video/larine-full.mp4" },
-  { title: "Rootless Plants",    tag: "Home decor", brand: "Rootless Plants",    cta: "Shop now",
+  { title: "Rootless Plants",    tag: "Home decor", logo: "assets/brands/rootlessplants.png", brand: "Rootless Plants",    cta: "Shop now",
     poster: "assets/video/rootless.jpg",   full: "assets/video/rootless-full.mp4" },
-  { title: "The Perfect Jean",   tag: "Apparel",    brand: "The Perfect Jean",   cta: "Shop now",
+  { title: "The Perfect Jean",   tag: "Apparel", logo: "assets/brands/theperfectjean.png",    brand: "The Perfect Jean",   cta: "Shop now",
     poster: "assets/video/perfect-jean.jpg", full: "assets/video/perfect-jean-full.mp4" },
-  { title: "Southern Fry Kings", tag: "Food",       brand: "Southern Fry Kings", cta: "Shop now",
+  { title: "Southern Fry Kings", tag: "Food", logo: "assets/brands/southernfrykings.png",       brand: "Southern Fry Kings", cta: "Shop now",
     poster: "assets/video/kings-chicken.jpg", full: "assets/video/kings-chicken-full.mp4" },
   { title: "Animated spot",      tag: "Animation",  id: "1YWqKMWrtH6mzG153Eg8Xq_RGIfjZtPsu", brand: "Turki", cta: "Learn more", inHouse: true },
-  { title: "Golden Crunch",      tag: "Food",       brand: "Southern Fry Kings", cta: "Shop now",
+  { title: "Golden Crunch",      tag: "Food", logo: "assets/brands/southernfrykings.png",       brand: "Southern Fry Kings", cta: "Shop now",
     poster: "assets/video/golden-crunch.jpg", full: "assets/video/golden-crunch-full.mp4" }
 ];
 
 /* The Ad Library in the hero shows four ads only; the rest live in the
    campaigns below and in gallery.html. Indexes point into WORK. */
-const LIBRARY = [0, 4, 2, 8];
+const LIBRARY = [0, 4, 3, 8];
 
 /* ✏️ 4. REAL VIDEO — this is what makes the mockups come alive.
    Export each ad as a short muted MP4 (5–8s is plenty, ~720px wide),
@@ -1317,8 +1349,11 @@ document.querySelectorAll('#dashBody [data-variant]').forEach(el => {
 
 /* ---------- contact ---------- */
 const mailto = `mailto:${CONTACT.email}?subject=${encodeURIComponent("Project enquiry")}`;
+/* "Work with me" opens a Gmail draft already addressed to CONTACT.email;
+   the footer keeps a plain mailto for people who use another mail app. */
+const gmail = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(CONTACT.email)}&su=${encodeURIComponent("Project enquiry")}`;
 document.querySelectorAll('[data-contact]').forEach(el => {
-  el.href = el.dataset.contact === 'email' ? mailto : CONTACT[el.dataset.contact];
+  el.href = el.dataset.contact === 'email' ? gmail : CONTACT[el.dataset.contact];
 });
 document.getElementById('footLinks').innerHTML = [
   ['Email', mailto], ['Instagram', CONTACT.instagram], ['X', CONTACT.x], ['LinkedIn', CONTACT.linkedin]
