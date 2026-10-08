@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Gallery — Turki, AI UGC specialist</title>
+<meta name="description" content="Every ad Turki has built, in one place: AI UGC and animated short-form creative for Meta and TikTok, each with the brief behind it." />
+<meta name="theme-color" content="#08090B" />
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#08090B;
+  --bg-2:#0D0F13;
+  --panel:#12151A;
+  --panel-2:#181C23;
+  --line:rgba(255,255,255,.09);
+  --line-2:rgba(255,255,255,.16);
+  --text:#F3F4F6;
+  --muted:#9096A1;
+  --dim:#5C626D;
+  --live:#31A24C;
+
+  --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --gut:28px;
+  --max:1240px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg);color:var(--text);font-family:var(--sans);
+  font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+::selection{background:var(--text);color:var(--bg)}
+:focus-visible{outline:1px solid var(--text);outline-offset:3px}
+
+.wrap{max-width:var(--max);margin:0 auto;padding-inline:var(--gut)}
+.h1{font-size:clamp(36px,5.4vw,68px);font-weight:600;line-height:1.03;letter-spacing:-.04em;text-wrap:balance}
+.lede{font-size:clamp(16px,1.35vw,18.5px);color:var(--muted);line-height:1.62;max-width:54ch;text-wrap:pretty}
+.tag{
+  font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--dim);
+}
+
+/* ── nav (same as the main page) ─────────────────────── */
+.nav{
+  position:fixed;inset:12px 12px auto 12px;z-index:70;border-radius:14px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:11px 12px 11px 18px;
+  background:rgba(10,11,14,.55);border:1px solid var(--line);
+  backdrop-filter:blur(20px) saturate(150%);
+  -webkit-backdrop-filter:blur(20px) saturate(150%);
+  max-width:var(--max);margin-inline:auto;
+}
+.nav__name{font-weight:600;letter-spacing:-.02em;font-size:15px}
+.nav__end{display:flex;align-items:center;gap:16px}
+.nav__back{font-size:14px;color:var(--muted);transition:color .25s var(--ease)}
+.nav__back:hover{color:var(--text)}
+.nav__cta{
+  font-size:13.5px;font-weight:500;padding:9px 15px;border-radius:9px;
+  background:var(--text);color:var(--bg);transition:opacity .25s var(--ease);
+}
+.nav__cta:hover{opacity:.86}
+
+/* ── head ─────────────────────────────────────────────── */
+.head{position:relative;padding-top:150px;padding-bottom:34px}
+.head__glow{
+  position:absolute;top:-260px;left:50%;translate:-50% 0;
+  width:1100px;max-width:140vw;height:640px;pointer-events:none;
+  background:radial-gradient(ellipse at center,rgba(90,120,220,.15),transparent 62%);
+  filter:blur(30px);
+}
+.head .h1{margin:18px 0 20px;max-width:15ch}
+.head__live{display:inline-flex;align-items:center;gap:8px}
+.head__live i{width:7px;height:7px;border-radius:50%;background:var(--live);box-shadow:0 0 0 4px rgba(49,162,76,.18)}
+
+/* ── filters ──────────────────────────────────────────── */
+.bar{
+  position:sticky;top:76px;z-index:20;margin-top:26px;
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;
+  padding:10px 0;background:linear-gradient(var(--bg) 70%,transparent);
+}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{
+  font-size:13.5px;padding:8px 14px;border-radius:999px;color:var(--muted);
+  border:1px solid var(--line);transition:color .25s var(--ease),border-color .25s var(--ease),background .25s var(--ease);
+}
+.chip:hover{color:var(--text);border-color:var(--line-2)}
+.chip[aria-pressed="true"]{background:var(--text);color:var(--bg);border-color:var(--text)}
+.chip b{font-family:var(--mono);font-weight:500;font-size:11px;opacity:.6;margin-left:6px}
+.bar__hint{font-size:13px;color:var(--dim)}
+
+/* ── grid ─────────────────────────────────────────────── */
+.grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+  gap:20px;padding-top:18px;padding-bottom:120px;
+}
+.tile{
+  position:relative;display:block;width:100%;text-align:left;
+  border-radius:16px;overflow:hidden;background:var(--panel);
+  border:1px solid var(--line);aspect-ratio:9/16;
+  box-shadow:0 30px 60px -40px rgba(0,0,0,.9);
+  transition:transform .5s var(--ease),border-color .4s var(--ease),box-shadow .5s var(--ease);
+}
+.tile:hover,.tile:focus-visible{transform:translateY(-4px);border-color:var(--line-2);box-shadow:0 40px 70px -36px rgba(0,0,0,.95)}
+.tile[hidden]{display:none}
+.tile__media,.tile__media img,.tile__media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.tile__media video{opacity:0;transition:opacity .4s var(--ease)}
+.tile.is-playing .tile__media video{opacity:1}
+.tile__media img{transition:transform 1.2s var(--ease)}
+.tile:hover .tile__media img{transform:scale(1.04)}
+.tile__shade{
+  position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(0,0,0,.45) 0%,transparent 22%,transparent 50%,rgba(0,0,0,.88) 100%);
+}
+.tile__top{position:absolute;top:12px;left:12px;right:12px;display:flex;justify-content:space-between;gap:8px}
+.tile__kind,.tile__time{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+  padding:4px 8px;border-radius:6px;background:rgba(10,11,14,.6);border:1px solid rgba(255,255,255,.14);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+}
+.tile__foot{position:absolute;left:14px;right:14px;bottom:14px}
+.tile__who{display:flex;align-items:center;gap:9px}
+.av{
+  width:26px;height:26px;border-radius:50%;flex:none;display:grid;place-items:center;
+  background:#2A2F38 center/cover no-repeat;font-size:11px;font-weight:600;color:var(--text);
+  box-shadow:0 0 0 1px rgba(255,255,255,.18);
+}
+.tile__brand{font-size:12.5px;color:rgba(255,255,255,.75)}
+.tile__title{font-size:19px;font-weight:600;letter-spacing:-.02em;line-height:1.2;margin-top:8px}
+.tile__vert{font-size:12.5px;color:rgba(255,255,255,.62);margin-top:3px}
+.tile__play{
+  position:absolute;top:50%;left:50%;translate:-50% -50%;
+  width:54px;height:54px;border-radius:50%;display:grid;place-items:center;
+  background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  opacity:0;transform:scale(.85);transition:opacity .35s var(--ease),transform .5s var(--ease);
+}
+.tile__play svg{width:18px;height:18px;fill:#fff;margin-left:3px}
+.tile:hover .tile__play,.tile:focus-visible .tile__play{opacity:1;transform:none}
+@media (hover:none){.tile__play{opacity:1;transform:none;width:46px;height:46px}}
+@media(max-width:560px){
+  .grid{grid-template-columns:repeat(2,1fr);gap:12px}
+  .tile__title{font-size:15.5px}
+  .tile__vert{display:none}
+  .tile__brand{font-size:11.5px}
+  .av{width:22px;height:22px;font-size:10px}
+  .tile__top{top:9px;left:9px;right:9px}
+  .tile__foot{left:11px;right:11px;bottom:11px}
+}
+
+/* ── viewer ───────────────────────────────────────────── */
+.vw{
+  position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;
+  padding:24px;background:rgba(4,5,7,.92);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  opacity:0;visibility:hidden;transition:opacity .35s var(--ease),visibility .35s;
+}
+.vw.is-open{opacity:1;visibility:visible}
+.vw__box{
+  display:grid;grid-template-columns:auto minmax(0,400px);gap:44px;align-items:center;
+  max-height:100%;transform:translateY(14px) scale(.98);transition:transform .5s var(--ease);
+}
+.vw.is-open .vw__box{transform:none}
+.vw__player{
+  height:min(82vh,760px);aspect-ratio:9/16;border-radius:18px;overflow:hidden;background:#000;
+  box-shadow:0 50px 100px -30px rgba(0,0,0,.95);border:1px solid var(--line);
+}
+.vw__player video,.vw__player iframe{width:100%;height:100%;border:0;display:block;background:#000}
+.vw__info{max-height:82vh;overflow:auto;padding-right:4px}
+.vw__no{font-family:var(--mono);font-size:12px;color:var(--dim);letter-spacing:.1em}
+.vw__brand{display:flex;align-items:center;gap:12px;margin:14px 0 6px}
+.vw__brand .av{width:34px;height:34px;font-size:13px}
+.vw__brand span{font-size:14px;color:var(--muted)}
+.vw__title{font-size:clamp(26px,2.6vw,34px);font-weight:600;letter-spacing:-.03em;line-height:1.1}
+.vw__hook{
+  margin-top:18px;font-size:15px;line-height:1.5;color:var(--text);
+  border-left:2px solid var(--live);padding-left:12px;
+}
+.vw__hook small{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:4px}
+.vw__about{margin-top:18px;font-size:15px;line-height:1.65;color:var(--muted)}
+.vw__list{list-style:none;margin-top:22px;border-top:1px solid var(--line)}
+.vw__list li{
+  display:flex;justify-content:space-between;gap:20px;align-items:baseline;
+  padding:11px 0;border-bottom:1px solid var(--line);font-size:14px;
+}
+.vw__list b{font-weight:400;color:var(--dim)}
+.vw__list span{font-weight:500;text-align:right}
+.vw__list a{border-bottom:1px solid var(--line-2)}
+.vw__nav{display:flex;gap:10px;margin-top:26px}
+.vw__btn{
+  display:inline-flex;align-items:center;gap:8px;padding:11px 16px;border-radius:10px;
+  font-size:14px;font-weight:500;border:1px solid var(--line-2);
+  transition:border-color .25s var(--ease),transform .25s var(--ease);
+}
+.vw__btn:hover{border-color:var(--text);transform:translateY(-1px)}
+.vw__btn--solid{background:var(--text);color:var(--bg);border-color:var(--text)}
+.vw__close{
+  position:absolute;top:18px;right:20px;width:42px;height:42px;border-radius:50%;
+  display:grid;place-items:center;border:1px solid var(--line-2);color:var(--muted);
+  transition:color .25s var(--ease),border-color .25s var(--ease);
+}
+.vw__close:hover{color:var(--text);border-color:var(--text)}
+.vw__count{font-family:var(--mono);font-size:12px;color:var(--dim);margin-left:auto;align-self:center}
+@media(max-width:860px){
+  .vw{align-items:flex-start;overflow:auto;padding:70px 18px 30px}
+  .vw__box{grid-template-columns:1fr;gap:24px;justify-items:center;max-height:none}
+  .vw__player{height:auto;width:min(340px,100%)}
+  .vw__info{max-height:none;overflow:visible;width:100%;max-width:440px}
+}
+
+/* ── foot ─────────────────────────────────────────────── */
+.foot{
+  border-top:1px solid var(--line);padding-block:30px;
+  display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;
+  font-size:13px;color:var(--dim);
+}
+.foot a{color:var(--muted)}
+.foot a:hover{color:var(--text)}
+
+@media (prefers-reduced-motion:no-preference){
+  .rv{opacity:0;transform:translateY(18px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+  .rv.in{opacity:1;transform:none}
+  .tile{animation:rise .8s var(--ease) both}
+  @keyframes rise{from{opacity:0;transform:translateY(24px)}}
+}
+@media(max-width:600px){
+  :root{--gut:18px}
+  .nav{inset:8px 8px auto;padding-left:14px}
+  .bar{top:66px}
+  .bar__hint{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav__name">Turki</a>
+  <div class="nav__end">
+    <a class="nav__back" href="index.html">&larr; Portfolio</a>
+    <a class="nav__cta" href="index.html#contact">Work with me</a>
+  </div>
+</nav>
+
+<main>
+  <header class="head">
+    <div class="head__glow" aria-hidden="true"></div>
+    <div class="wrap" style="position:relative">
+      <p class="tag rv head__live"><i></i>Gallery</p>
+      <h1 class="h1 rv">Every ad, in one place.</h1>
+      <p class="lede rv" id="headLede">AI UGC and animated short-form, built for Meta and TikTok. Open any ad to watch the full cut with sound and read the brief behind it.</p>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="bar" role="toolbar" aria-label="Filter ads">
+      <div class="chips" id="chips"></div>
+      <span class="bar__hint">Use &larr; &rarr; to move between ads</span>
+    </div>
+    <div class="grid" id="grid"></div>
+  </div>
+</main>
+
+<div class="wrap">
+  <footer class="foot">
+    <span>Turki · AI UGC specialist · Cairo</span>
+    <a href="index.html">Back to the portfolio</a>
+  </footer>
+</div>
+
+<div class="vw" id="vw" role="dialog" aria-modal="true" aria-labelledby="vwTitle">
+  <button class="vw__close" id="vwClose" aria-label="Close">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 1l12 12M13 1L1 13"/></svg>
+  </button>
+  <div class="vw__box">
+    <div class="vw__player" id="vwPlayer"></div>
+    <div class="vw__info">
+      <div class="vw__no" id="vwNo"></div>
+      <div class="vw__brand" id="vwBrand"></div>
+      <h2 class="vw__title" id="vwTitle"></h2>
+      <p class="vw__hook" id="vwHook"></p>
+      <p class="vw__about" id="vwAbout"></p>
+      <ul class="vw__list" id="vwList"></ul>
+      <div class="vw__nav">
+        <button class="vw__btn" id="vwPrev">&larr; Previous</button>
+        <button class="vw__btn vw__btn--solid" id="vwNext">Next &rarr;</button>
+        <span class="vw__count" id="vwCount"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ════════════════════════════════════════════════════════════
+   ✏️ Every ad in the gallery. Order here is the order on the page.
+   loop   — short muted clip that plays on hover
+   full   — the full cut with sound, opened in the viewer
+   drive  — a Google Drive file id, used when there is no local full cut
+   hook   — the opening line as it appears on screen (optional)
+   ════════════════════════════════════════════════════════════ */
+const ADS = [
+  { slug:"larine", title:"Remineralizing Gum", brand:"Larine", logo:"assets/brands/larine.png",
+    kind:"UGC", vertical:"Oral care · DTC",
+    loop:"assets/video/larine.mp4", poster:"assets/video/larine.jpg", full:"assets/video/larine-full.mp4",
+    hook:"If you still have yellow teeth&hellip;",
+    about:"Car-selfie UGC with word-by-word captions. Every claim &mdash; whitening, enamel, xylitol &mdash; is backed by a search result on screen before the three flavours land on the close.",
+    specs:[["Brand",'<a href="https://buylarine.com/" target="_blank" rel="noopener">Larine &nearr;</a>'],["Format","Car-selfie UGC"],["Runtime","0:29"]] },
+
+  { slug:"ultimapeak", title:"UltimaPeak", brand:"UltimaPeak", logo:"assets/brands/ultimapeak.png",
+    kind:"UGC", vertical:"Supplement · DTC",
+    loop:"assets/video/ultimapeak.mp4", poster:"assets/video/hook-3.jpg", drive:"1H5ZwVGR_7hRViW2jNu7W05r12JIm_9nt",
+    hook:"Every woman in here with a husband over 40&hellip;",
+    about:"A supplement angle shot as a stage moment rather than a bathroom selfie. The presenter, the room and the crowd are all generated, then cut so the callout lands before the first scroll.",
+    specs:[["Placement","TikTok · Reels"],["Built with","HeyGen · ElevenLabs · Higgsfield"],["Delivered","3 hook variants"]] },
+
+  { slug:"injury-counsel", title:"Injury Counsel", brand:"Injury Counsel",
+    kind:"UGC", vertical:"Legal · Lead gen",
+    loop:"assets/video/injury-counsel.mp4", poster:"assets/video/injury.jpg", full:"assets/video/injury-full.mp4",
+    hook:"Wait too long after a crash and the compensation you could recover quietly slips out of reach.",
+    about:"An organic-style talking head that plays like a warning from a friend, not a pitch from a firm. Neck-brace and roadside inserts break up the read, and the captions carry the whole claim with the sound off.",
+    specs:[["Placement","Facebook · Reels"],["Format","Organic UGC"],["Runtime","0:55"]] },
+
+  { slug:"nerve-patch", title:"Nerve Patch", brand:"mypatches", logo:"assets/brands/mypatches.png",
+    kind:"UGC", vertical:"Supplement · DTC",
+    loop:"assets/video/nervepatch-product.mp4", poster:"assets/video/nervepatch-product.jpg", full:"assets/video/nervepatch-full.mp4",
+    about:"A kitchen-counter testimonial cut against glowing nerve-pathway b&#8209;roll that shows the ingredients at work, then a wall of reviews and the offer card to close.",
+    specs:[["Brand",'<a href="https://mypatchestore.com/" target="_blank" rel="noopener">mypatches &nearr;</a>'],["Format","UGC + animated b&#8209;roll"],["Runtime","1:13"]] },
+
+  { slug:"rootless-plants", title:"Rootless Plants", brand:"Rootless Plants",
+    kind:"UGC", vertical:"Home decor · Faux trees",
+    loop:"assets/video/rootless.mp4", poster:"assets/video/rootless.jpg", full:"assets/video/rootless-full.mp4",
+    hook:"I read every single review before I buy anything.",
+    about:"A skeptic&rsquo;s confession from the living room. She opens on the plastic-tree disappointment every shopper fears, then walks the camera into a golden Heritage Maple until you can see the leaf veins and the warm gradient for yourself. The close is one line: just read the reviews. They sold me.",
+    specs:[["Format","Skeptic-to-believer UGC"],["Runtime","0:38"]] },
+
+  { slug:"the-perfect-jean", title:"The Perfect Jean", brand:"The Perfect Jean",
+    kind:"UGC", vertical:"Apparel · Jeans · DTC",
+    loop:"assets/video/perfect-jean.mp4", poster:"assets/video/perfect-jean.jpg", full:"assets/video/perfect-jean-full.mp4",
+    hook:"Stop the desk torture.",
+    about:"The hook is a pain every desk worker knows: nine hours in stiff denim. The proof is a squat at a server rack, then a split-screen of old jeans against The Perfect Jean after a big lunch. Neon size tags run W28 to W52 before the 15% off card closes it.",
+    specs:[["Format","Split-screen demo UGC"],["Runtime","0:37"]] },
+
+  { slug:"southern-fry-kings", title:"Southern Fry Kings", brand:"Southern Fry Kings",
+    kind:"UGC", vertical:"Food · Chicken batter · DTC",
+    loop:"assets/video/kings-chicken.mp4", poster:"assets/video/kings-chicken.jpg", full:"assets/video/kings-chicken-full.mp4",
+    hook:"Okay, real talk.",
+    about:"A food creator who has had enough of viral food hype, so he fries the proof on camera. A rolling pot of oil, a tray of golden chicken and a bite you can almost hear sell the Kings Chicken Original Creole fry batter: seasoned all the way through, with the bag in frame the whole time.",
+    specs:[["Format","Skeptic-hook UGC"],["Runtime","0:22"]] },
+
+  { slug:"golden-crunch", title:"Golden Crunch", brand:"Southern Fry Kings",
+    kind:"Animated", vertical:"Food · Chicken batter · DTC",
+    loop:"assets/video/golden-crunch.mp4", poster:"assets/video/golden-crunch.jpg", full:"assets/video/golden-crunch-full.mp4",
+    hook:"Coat it, coat it! Fry it, fry it!",
+    about:"The same Kings Chicken batter, sold as a song. A fully animated jingle where the lyric is the method: coat it, fry it, hear that golden crunch. A raw drumstick turns into a golden pile, the crunch plays in slow motion, and a backyard couple can&rsquo;t hide their reaction before the bag lands on the tray.",
+    specs:[["Format","3D animated jingle"],["Runtime","0:21"]] },
+
+  { slug:"animated-spot", title:"Animated spot", brand:"Turki · in-house",
+    kind:"Animated", vertical:"Animation",
+    loop:"assets/video/animation.mp4", poster:"assets/video/animation.jpg", drive:"1YWqKMWrtH6mzG153Eg8Xq_RGIfjZtPsu",
+    about:"A fully animated route for an angle live action could not carry. Same discipline as the UGC cuts &mdash; hook first, captions burned in, built to be read at arm&rsquo;s length on a phone.",
+    specs:[["Placement","TikTok · Reels"],["Built with","Higgsfield · After Effects"],["Delivered","3 hook variants"]] }
+];
+
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const canHover = matchMedia('(hover: hover)').matches;
+const initials = s => s.replace(/[^A-Za-z ]/g,'').split(' ').filter(Boolean).slice(0,2).map(w => w[0]).join('').toUpperCase();
+const avatar = a => a.logo
+  ? `<span class="av" style="background-image:url(${a.logo})"></span>`
+  : `<span class="av">${initials(a.brand)}</span>`;
+const runtime = a => (a.specs.find(s => s[0] === 'Runtime') || [])[1] || '';
+
+/* ---------- filters ---------- */
+const FILTERS = [
+  ['All', () => true],
+  ['UGC', a => a.kind === 'UGC'],
+  ['Animated', a => a.kind === 'Animated'],
+  ['Supplement', a => /Supplement/.test(a.vertical)],
+  ['Food', a => /Food/.test(a.vertical)],
+  ['Home & apparel', a => /Home|Apparel/.test(a.vertical)],
+  ['Legal', a => /Legal/.test(a.vertical)]
+];
+let filter = 0;
+const chips = document.getElementById('chips');
+chips.innerHTML = FILTERS.map(([label, fn], i) =>
+  `<button class="chip" data-f="${i}" aria-pressed="${i === 0}">${label}<b>${ADS.filter(fn).length}</b></button>`).join('');
+chips.addEventListener('click', e => {
+  const b = e.target.closest('[data-f]');
+  if (!b) return;
+  filter = +b.dataset.f;
+  chips.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', c === b));
+  document.querySelectorAll('.tile').forEach(t => { t.hidden = !FILTERS[filter][1](ADS[+t.dataset.i]); });
+});
+
+/* ---------- grid ---------- */
+const grid = document.getElementById('grid');
+grid.innerHTML = ADS.map((a, i) => `
+  <button class="tile" data-i="${i}" style="animation-delay:${80 + i * 60}ms" aria-label="Watch ${a.title} for ${a.brand}">
+    <div class="tile__media">
+      ${a.poster ? `<img src="${a.poster}" alt="" loading="lazy">` : ''}
+      ${reduced ? '' : `<video data-src="${a.loop}" muted loop playsinline preload="none"${a.poster ? ` poster="${a.poster}"` : ''}></video>`}
+    </div>
+    <div class="tile__shade"></div>
+    <div class="tile__top">
+      <span class="tile__kind">${a.kind}</span>
+      ${runtime(a) ? `<span class="tile__time">${runtime(a)}</span>` : ''}
+    </div>
+    <div class="tile__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></svg></div>
+    <div class="tile__foot">
+      <div class="tile__who">${avatar(a)}<span class="tile__brand">${a.brand}</span></div>
+      <div class="tile__title">${a.title}</div>
+      <div class="tile__vert">${a.vertical}</div>
+    </div>
+  </button>`).join('');
+
+function startLoop(tile){
+  const v = tile.querySelector('video');
+  if (!v) return;
+  if (!v.src) v.src = v.dataset.src;
+  v.muted = true;
+  const p = v.play();
+  if (p) p.then(() => tile.classList.add('is-playing')).catch(() => {});
+}
+function stopLoop(tile){
+  const v = tile.querySelector('video');
+  if (v && !v.paused) v.pause();
+  tile.classList.remove('is-playing');
+}
+grid.querySelectorAll('.tile').forEach(tile => {
+  if (canHover){
+    tile.addEventListener('mouseenter', () => startLoop(tile));
+    tile.addEventListener('mouseleave', () => stopLoop(tile));
+    tile.addEventListener('focus', () => startLoop(tile));
+    tile.addEventListener('blur', () => stopLoop(tile));
+  }
+  tile.addEventListener('click', () => openAd(+tile.dataset.i, tile));
+});
+/* On touch screens there is no hover, so the tile nearest the middle of
+   the screen plays instead, one at a time. */
+if (!canHover && !reduced && 'IntersectionObserver' in window){
+  const io = new IntersectionObserver(es => es.forEach(en => en.isIntersecting ? startLoop(en.target) : stopLoop(en.target)),
+    { rootMargin: '-38% 0px -38% 0px' });
+  grid.querySelectorAll('.tile').forEach(t => io.observe(t));
+}
+
+/* ---------- viewer ---------- */
+const vw = document.getElementById('vw');
+const $ = id => document.getElementById(id);
+let current = -1, lastFocus = null;
+
+const visible = () => ADS.map((a, i) => i).filter(i => FILTERS[filter][1](ADS[i]));
+
+function render(i){
+  const a = ADS[i];
+  current = i;
+  $('vwPlayer').innerHTML = a.full
+    ? `<video src="${a.full}" controls autoplay playsinline${a.poster ? ` poster="${a.poster}"` : ''}></video>`
+    : `<iframe src="https://drive.google.com/file/d/${a.drive}/preview" allow="autoplay; fullscreen" allowfullscreen title="${a.title}"></iframe>`;
+  const v = $('vwPlayer').querySelector('video');
+  if (v) v.play().catch(() => {});
+  $('vwNo').textContent = `Ad ${String(i + 1).padStart(2, '0')} · ${a.kind}`;
+  $('vwBrand').innerHTML = `${avatar(a)}<span>${a.brand}</span>`;
+  $('vwTitle').textContent = a.title;
+  $('vwHook').hidden = !a.hook;
+  $('vwHook').innerHTML = a.hook ? `<small>The hook</small>&ldquo;${a.hook}&rdquo;` : '';
+  $('vwAbout').innerHTML = a.about;
+  const specs = [["Vertical", a.vertical], ...a.specs];
+  if (!specs.some(s => s[0] === 'Brand')) specs.unshift(["Brand", a.brand]);
+  $('vwList').innerHTML = specs.map(([k, v]) => `<li><b>${k}</b><span>${v}</span></li>`).join('');
+  const list = visible(), pos = list.indexOf(i);
+  $('vwCount').textContent = `${pos + 1} / ${list.length}`;
+  history.replaceState(null, '', '#' + a.slug);
+}
+function openAd(i, trigger){
+  lastFocus = trigger || null;
+  grid.querySelectorAll('.tile').forEach(stopLoop);
+  render(i);
+  vw.classList.add('is-open');
+  document.body.style.overflow = 'hidden';
+  $('vwClose').focus();
+}
+function step(d){
+  const list = visible();
+  const pos = list.indexOf(current);
+  render(list[(pos + d + list.length) % list.length]);
+}
+function closeAd(){
+  if (!vw.classList.contains('is-open')) return;
+  vw.classList.remove('is-open');
+  document.body.style.overflow = '';
+  const v = $('vwPlayer').querySelector('video');
+  if (v) v.pause();
+  setTimeout(() => { if (!vw.classList.contains('is-open')) $('vwPlayer').innerHTML = ''; }, 360);
+  history.replaceState(null, '', location.pathname + location.search);
+  if (lastFocus) lastFocus.focus();
+}
+$('vwClose').addEventListener('click', closeAd);
+$('vwPrev').addEventListener('click', () => step(-1));
+$('vwNext').addEventListener('click', () => step(1));
+vw.addEventListener('click', e => { if (e.target === vw) closeAd(); });
+document.addEventListener('keydown', e => {
+  if (!vw.classList.contains('is-open')) return;
+  if (e.key === 'Escape') closeAd();
+  else if (e.key === 'ArrowRight') step(1);
+  else if (e.key === 'ArrowLeft') step(-1);
+});
+
+/* a link straight to one ad — gallery.html#rootless-plants — opens it */
+const deep = ADS.findIndex(a => '#' + a.slug === location.hash);
+if (deep > -1) openAd(deep);
+
+/* ---------- reveal ---------- */
+document.querySelectorAll('.rv').forEach((el, i) => {
+  el.style.transitionDelay = (100 + i * 90) + 'ms';
+  requestAnimationFrame(() => el.classList.add('in'));
+});
+</script>
+</body>
+</html>

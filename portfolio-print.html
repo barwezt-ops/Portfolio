@@ -104,6 +104,10 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
   background:var(--text);color:var(--bg);transition:opacity .25s var(--ease);
 }
 .nav__cta:hover{opacity:.86}
+.nav__end{display:flex;align-items:center;gap:16px}
+.nav__gal{font-size:14px;font-weight:500;color:var(--text);display:inline-flex;align-items:center;gap:6px}
+.nav__gal::before{content:"";width:6px;height:6px;border-radius:50%;background:#31A24C;box-shadow:0 0 0 3px rgba(49,162,76,.2)}
+.nav__gal:hover{opacity:.8}
 @media(max-width:760px){.nav__mid{display:none}}
 
 /* ══════════════════════════════════════════════════════
@@ -350,6 +354,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 .case__list a{border-bottom:1px solid var(--line);transition:border-color .3s var(--ease)}
 .case__list a:hover{border-color:var(--text)}
 .case__media{position:relative;display:flex;justify-content:center}
+.case__more{display:flex;justify-content:center;padding-bottom:clamp(70px,9vw,120px)}
 .case__media .phone{width:min(300px,100%)}
 @media(max-width:880px){
   .case__grid{grid-template-columns:1fr;gap:44px}
@@ -529,7 +534,10 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
     <a href="#pipeline">Workflow</a>
     <a href="#testing">Testing</a>
   </div>
-  <a class="nav__cta" data-contact="email">Work with me</a>
+  <div class="nav__end">
+    <a class="nav__gal" href="gallery.html">Gallery</a>
+    <a class="nav__cta" data-contact="email">Work with me</a>
+  </div>
 </nav>
 
 <main id="top">
@@ -707,7 +715,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 <section class="wrap" id="work">
   <div class="sec" style="padding-bottom:0">
     <p class="tag rv">Selected campaigns</p>
-    <h2 class="h2 rv" style="margin-top:14px;max-width:16ch">Eight builds, start to export.</h2>
+    <h2 class="h2 rv" style="margin-top:14px;max-width:16ch">Nine builds, start to export.</h2>
   </div>
 
   <article class="case" style="border-top:none">
@@ -974,6 +982,41 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
     <div class="case__grid">
       <div class="rv">
         <div class="case__no">Campaign 08</div>
+        <h3 class="h3">Golden Crunch</h3>
+        <p class="lede">The same Kings Chicken batter, sold as a song. A fully animated jingle where the lyric is the method: coat it, fry it, hear that golden crunch. A raw drumstick turns into a golden pile, the crunch plays in slow motion, and a backyard couple can&rsquo;t hide their reaction before the bag lands on the tray.</p>
+        <ul class="case__list">
+          <li><b>Brand</b><span>Southern Fry Kings</span></li>
+          <li><b>Vertical</b><span>Food · Chicken batter · DTC</span></li>
+          <li><b>Format</b><span>3D animated jingle</span></li>
+          <li><b>Runtime</b><span>0:21</span></li>
+        </ul>
+      </div>
+      <div class="case__media rv-scale">
+        <div class="phone" data-play="8">
+          <div class="phone__screen">
+            <div class="phone__notch"></div>
+            <div class="phone__media" data-clip="8"></div>
+            <div class="phone__scrim"></div>
+            <div class="ui ui--tt">
+              <div class="ui__status"><span>9:41</span><span>▮▮▮</span></div>
+              <div class="ui__spacer"></div>
+              <div class="ui__foot">
+                <div class="ui__user"><i></i>southernfrykings</div>
+                <div class="ui__spon">Sponsored</div>
+                <div class="ui__cta"><span>Shop now</span><span>&rsaquo;</span></div>
+              </div>
+              <div class="ui__bar"><i></i></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <article class="case">
+    <div class="case__grid">
+      <div class="rv">
+        <div class="case__no">Campaign 09</div>
         <h3 class="h3">Animated spot</h3>
         <p class="lede">A fully animated route for an angle live action could not carry. Same discipline as the UGC cuts &mdash; hook first, captions burned in, built to be read at arm&rsquo;s length on a phone.</p>
         <ul class="case__list">
@@ -1005,6 +1048,10 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
       </div>
     </div>
   </article>
+
+  <div class="case__more rv">
+    <a class="btn btn--ghost" href="gallery.html">See every ad in the gallery <span aria-hidden="true">&rarr;</span></a>
+  </div>
 </section>
 
 <!-- ═══════════════ PIPELINE ═══════════════ -->
@@ -1103,8 +1150,14 @@ const WORK = [
     poster: "assets/video/perfect-jean.jpg", full: "assets/video/perfect-jean-full.mp4" },
   { title: "Southern Fry Kings", tag: "Food",       brand: "Southern Fry Kings", cta: "Shop now",
     poster: "assets/video/kings-chicken.jpg", full: "assets/video/kings-chicken-full.mp4" },
-  { title: "Animated spot",      tag: "Animation",  id: "1YWqKMWrtH6mzG153Eg8Xq_RGIfjZtPsu", brand: "Turki", cta: "Learn more", inHouse: true }
+  { title: "Animated spot",      tag: "Animation",  id: "1YWqKMWrtH6mzG153Eg8Xq_RGIfjZtPsu", brand: "Turki", cta: "Learn more", inHouse: true },
+  { title: "Golden Crunch",      tag: "Food",       brand: "Southern Fry Kings", cta: "Shop now",
+    poster: "assets/video/golden-crunch.jpg", full: "assets/video/golden-crunch-full.mp4" }
 ];
+
+/* The Ad Library in the hero shows four ads only; the rest live in the
+   campaigns below and in gallery.html. Indexes point into WORK. */
+const LIBRARY = [0, 4, 2, 8];
 
 /* ✏️ 4. REAL VIDEO — this is what makes the mockups come alive.
    Export each ad as a short muted MP4 (5–8s is plenty, ~720px wide),
@@ -1118,7 +1171,8 @@ const VIDEOS = [
   "assets/video/rootless.mp4",
   "assets/video/perfect-jean.mp4",
   "assets/video/kings-chicken.mp4",
-  "assets/video/animation.mp4"
+  "assets/video/animation.mp4",
+  "assets/video/golden-crunch.mp4"
 ];
 
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1156,8 +1210,7 @@ function paint(el, i){
 document.querySelectorAll('[data-clip]').forEach(el => paint(el, +el.dataset.clip));
 
 /* ---------- ad library grid ---------- */
-/* Client brands only; the in-house spot has no advertiser to list. */
-document.getElementById('alGrid').innerHTML = WORK.map((w, i) => w.inHouse ? '' : `
+document.getElementById('alGrid').innerHTML = LIBRARY.map(i => [WORK[i], i]).map(([w, i]) => `
   <div class="adcard" data-play="${i}">
     <div class="adcard__head">
       <span class="adcard__status"><i></i>Active</span>
@@ -1433,7 +1486,7 @@ if (!reduced){
   .rv,.rv-scale,.adcard{opacity:1 !important;transform:none !important;filter:none !important}
 
   /* 2. Screen-only chrome. */
-  .nav,.lb,.hero__glow{display:none !important}
+  .nav,.lb,.hero__glow,.case__more{display:none !important}
 
   /* 3. Flatten the 3D desk so the mockup prints sharp. */
   .desk{perspective:none !important;margin-top:80px !important}
