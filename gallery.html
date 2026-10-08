@@ -3,9 +3,16 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Gallery — Turki, AI UGC specialist</title>
+<title>Gallery — Turki, AI UGC production for agencies</title>
 <meta name="description" content="Every ad Turki has built, in one place: AI UGC and animated short-form creative for Meta and TikTok, each with the brief behind it." />
 <meta name="theme-color" content="#08090B" />
+<link rel="canonical" href="https://barwezt-ops.github.io/Portfolio/gallery.html" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Turki — every ad, in one place" />
+<meta property="og:description" content="AI UGC and animated ads for Larine, UltimaPeak, The Perfect Jean, Rootless Plants and Southern Fry Kings, each with the brief behind it." />
+<meta property="og:image" content="https://barwezt-ops.github.io/Portfolio/assets/og.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<!-- ✏️ ANALYTICS: paste the same snippet as index.html here. -->
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
 <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png" />
@@ -206,6 +213,16 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 }
 .vw__btn:hover{border-color:var(--text);transform:translateY(-1px)}
 .vw__btn--solid{background:var(--text);color:var(--bg);border-color:var(--text)}
+.vw__cta{
+  display:block;margin-top:22px;padding:14px 16px;border-radius:12px;font-size:14px;color:var(--muted);
+  background:rgba(49,162,76,.08);border:1px solid rgba(49,162,76,.3);transition:border-color .25s var(--ease);
+}
+.vw__cta b{color:var(--text);font-weight:600;white-space:nowrap}
+.vw__cta:hover{border-color:rgba(49,162,76,.7)}
+.end{text-align:center;padding-block:20px 90px}
+.end p{color:var(--muted);margin:10px 0 24px}
+.end .h2{font-size:clamp(26px,3.4vw,42px);font-weight:600;letter-spacing:-.03em;line-height:1.1}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:14px 24px;border-radius:10px;font-size:15px;font-weight:500;background:var(--text);color:var(--bg)}
 .vw__close{
   position:absolute;top:18px;right:20px;width:42px;height:42px;border-radius:50%;
   display:grid;place-items:center;border:1px solid var(--line-2);color:var(--muted);
@@ -249,7 +266,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
   <a href="index.html" class="nav__name">Turki</a>
   <div class="nav__end">
     <a class="nav__back" href="index.html">&larr; Portfolio</a>
-    <a class="nav__cta" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=barwezt@gmail.com&amp;su=Project%20enquiry" target="_blank" rel="noopener">Work with me</a>
+    <a class="nav__cta" data-mail target="_blank" rel="noopener">Send a script</a>
   </div>
 </nav>
 
@@ -272,6 +289,12 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
   </div>
 </main>
 
+<section class="wrap end">
+  <h2 class="h2">Seen enough? Send the script.</h2>
+  <p>I&rsquo;ll come back with a price and a delivery date.</p>
+  <a class="btn" data-mail data-track="gallery_end_cta" target="_blank" rel="noopener">Send a script &rarr;</a>
+</section>
+
 <div class="wrap">
   <footer class="foot">
     <span>Turki · AI UGC specialist · Cairo</span>
@@ -292,6 +315,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
       <p class="vw__hook" id="vwHook"></p>
       <p class="vw__about" id="vwAbout"></p>
       <ul class="vw__list" id="vwList"></ul>
+      <a class="vw__cta" data-mail data-track="viewer_cta" target="_blank" rel="noopener">Want one like this for your brand? <b>Send a script &rarr;</b></a>
       <div class="vw__nav">
         <button class="vw__btn" id="vwPrev">&larr; Previous</button>
         <button class="vw__btn vw__btn--solid" id="vwNext">Next &rarr;</button>
@@ -317,25 +341,12 @@ const ADS = [
     about:"Car-selfie UGC with word-by-word captions. Every claim &mdash; whitening, enamel, xylitol &mdash; is backed by a search result on screen before the three flavours land on the close.",
     specs:[["Brand",'<a href="https://buylarine.com/" target="_blank" rel="noopener">Larine &nearr;</a>'],["Format","Car-selfie UGC"],["Runtime","0:29"]] },
 
-  { slug:"ultimapeak", title:"UltimaPeak", brand:"UltimaPeak", logo:"assets/brands/ultimapeak.png",
-    kind:"UGC", vertical:"Supplement · DTC",
-    loop:"assets/video/ultimapeak.mp4", poster:"assets/video/hook-3.jpg", drive:"1H5ZwVGR_7hRViW2jNu7W05r12JIm_9nt",
-    hook:"Every woman in here with a husband over 40&hellip;",
-    about:"A supplement angle shot as a stage moment rather than a bathroom selfie. The presenter, the room and the crowd are all generated, then cut so the callout lands before the first scroll.",
-    specs:[["Placement","TikTok · Reels"],["Built with","HeyGen · ElevenLabs · Higgsfield"],["Delivered","3 hook variants"]] },
-
-  { slug:"injury-counsel", title:"Injury Counsel", brand:"Injury Counsel", logo:"assets/brands/injurycounsel.png",
-    kind:"UGC", vertical:"Legal · Lead gen",
-    loop:"assets/video/injury-counsel.mp4", poster:"assets/video/injury.jpg", full:"assets/video/injury-full.mp4",
-    hook:"Wait too long after a crash and the compensation you could recover quietly slips out of reach.",
-    about:"An organic-style talking head that plays like a warning from a friend, not a pitch from a firm. Neck-brace and roadside inserts break up the read, and the captions carry the whole claim with the sound off.",
-    specs:[["Placement","Facebook · Reels"],["Format","Organic UGC"],["Runtime","0:55"]] },
-
-  { slug:"nerve-patch", title:"Nerve Patch", brand:"mypatches", logo:"assets/brands/mypatches.png",
-    kind:"UGC", vertical:"Supplement · DTC",
-    loop:"assets/video/nervepatch-product.mp4", poster:"assets/video/nervepatch-product.jpg", full:"assets/video/nervepatch-full.mp4",
-    about:"A kitchen-counter testimonial cut against glowing nerve-pathway b&#8209;roll that shows the ingredients at work, then a wall of reviews and the offer card to close.",
-    specs:[["Brand",'<a href="https://mypatchestore.com/" target="_blank" rel="noopener">mypatches &nearr;</a>'],["Format","UGC + animated b&#8209;roll"],["Runtime","1:13"]] },
+  { slug:"the-perfect-jean", title:"The Perfect Jean", brand:"The Perfect Jean", logo:"assets/brands/theperfectjean.png",
+    kind:"UGC", vertical:"Apparel · Jeans · DTC",
+    loop:"assets/video/perfect-jean.mp4", poster:"assets/video/perfect-jean.jpg", full:"assets/video/perfect-jean-full.mp4",
+    hook:"Stop the desk torture.",
+    about:"The hook is a pain every desk worker knows: nine hours in stiff denim. The proof is a squat at a server rack, then a split-screen of old jeans against The Perfect Jean after a big lunch. Neon size tags run W28 to W52 before the 15% off card closes it.",
+    specs:[["Format","Split-screen demo UGC"],["Runtime","0:37"]] },
 
   { slug:"rootless-plants", title:"Rootless Plants", brand:"Rootless Plants", logo:"assets/brands/rootlessplants.png",
     kind:"UGC", vertical:"Home decor · Faux trees",
@@ -343,13 +354,6 @@ const ADS = [
     hook:"I read every single review before I buy anything.",
     about:"A skeptic&rsquo;s confession from the living room. She opens on the plastic-tree disappointment every shopper fears, then walks the camera into a golden Heritage Maple until you can see the leaf veins and the warm gradient for yourself. The close is one line: just read the reviews. They sold me.",
     specs:[["Format","Skeptic-to-believer UGC"],["Runtime","0:38"]] },
-
-  { slug:"the-perfect-jean", title:"The Perfect Jean", brand:"The Perfect Jean", logo:"assets/brands/theperfectjean.png",
-    kind:"UGC", vertical:"Apparel · Jeans · DTC",
-    loop:"assets/video/perfect-jean.mp4", poster:"assets/video/perfect-jean.jpg", full:"assets/video/perfect-jean-full.mp4",
-    hook:"Stop the desk torture.",
-    about:"The hook is a pain every desk worker knows: nine hours in stiff denim. The proof is a squat at a server rack, then a split-screen of old jeans against The Perfect Jean after a big lunch. Neon size tags run W28 to W52 before the 15% off card closes it.",
-    specs:[["Format","Split-screen demo UGC"],["Runtime","0:37"]] },
 
   { slug:"southern-fry-kings", title:"Southern Fry Kings", brand:"Southern Fry Kings", logo:"assets/brands/southernfrykings.png",
     kind:"UGC", vertical:"Food · Chicken batter · DTC",
@@ -365,6 +369,26 @@ const ADS = [
     about:"The same Kings Chicken batter, sold as a song. A fully animated jingle where the lyric is the method: coat it, fry it, hear that golden crunch. A raw drumstick turns into a golden pile, the crunch plays in slow motion, and a backyard couple can&rsquo;t hide their reaction before the bag lands on the tray.",
     specs:[["Format","3D animated jingle"],["Runtime","0:21"]] },
 
+  { slug:"ultimapeak", title:"UltimaPeak", brand:"UltimaPeak", logo:"assets/brands/ultimapeak.png",
+    kind:"UGC", vertical:"Supplement · DTC",
+    loop:"assets/video/ultimapeak.mp4", poster:"assets/video/hook-3.jpg", drive:"1H5ZwVGR_7hRViW2jNu7W05r12JIm_9nt",
+    hook:"Every woman in here with a husband over 40&hellip;",
+    about:"A supplement angle shot as a stage moment rather than a bathroom selfie. The presenter, the room and the crowd are all generated, then cut so the callout lands before the first scroll.",
+    specs:[["Placement","TikTok · Reels"],["Built with","HeyGen · ElevenLabs · Higgsfield"],["Delivered","3 hook variants"]] },
+
+  { slug:"nerve-patch", title:"Nerve Patch", brand:"mypatches", logo:"assets/brands/mypatches.png",
+    kind:"UGC", vertical:"Supplement · DTC",
+    loop:"assets/video/nervepatch-product.mp4", poster:"assets/video/nervepatch-product.jpg", full:"assets/video/nervepatch-full.mp4",
+    about:"A kitchen-counter testimonial cut against glowing nerve-pathway b&#8209;roll that shows the ingredients at work, then a wall of reviews and the offer card to close.",
+    specs:[["Brand",'<a href="https://mypatchestore.com/" target="_blank" rel="noopener">mypatches &nearr;</a>'],["Format","UGC + animated b&#8209;roll"],["Runtime","1:13"]] },
+
+  { slug:"injury-counsel", title:"Injury Counsel", brand:"Injury Counsel", logo:"assets/brands/injurycounsel.png",
+    kind:"UGC", vertical:"Legal · Lead gen",
+    loop:"assets/video/injury-counsel.mp4", poster:"assets/video/injury.jpg", full:"assets/video/injury-full.mp4",
+    hook:"Wait too long after a crash and the compensation you could recover quietly slips out of reach.",
+    about:"An organic-style talking head that plays like a warning from a friend, not a pitch from a firm. Neck-brace and roadside inserts break up the read, and the captions carry the whole claim with the sound off.",
+    specs:[["Placement","Facebook · Reels"],["Format","Organic UGC"],["Runtime","0:55"]] },
+
   { slug:"animated-spot", title:"Animated spot", brand:"Turki · in-house",
     kind:"Animated", vertical:"Animation",
     loop:"assets/video/animation.mp4", poster:"assets/video/animation.jpg", drive:"1YWqKMWrtH6mzG153Eg8Xq_RGIfjZtPsu",
@@ -373,6 +397,23 @@ const ADS = [
 ];
 
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ✏️ Same contact and measurement wiring as index.html */
+const EMAIL = "barwezt@gmail.com";
+const FOR = (new URLSearchParams(location.search).get('for') || '').replace(/[^\w &.'-]/g, '').slice(0, 40).trim();
+const SUBJECT = 'Script for Turki' + (FOR ? ' — ' + FOR : '');
+const BODY = 'Hi Turki,\n\nAgency:\nBrand / product:\nHow many ads and formats:\nScript attached? Yes / No\nDeadline:\n\n';
+const GMAIL = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(EMAIL)}&su=${encodeURIComponent(SUBJECT)}&body=${encodeURIComponent(BODY)}`;
+document.querySelectorAll('[data-mail]').forEach(a => a.href = GMAIL);
+function track(name, props){
+  props = Object.assign({ page: 'gallery' }, FOR ? { for: FOR } : {}, props || {});
+  try{
+    if (window.plausible) window.plausible(name, { props });
+    else if (window.gtag) window.gtag('event', name, props);
+    else if (window.umami) window.umami.track(name, props);
+  }catch(e){}
+}
+document.addEventListener('click', e => { const t = e.target.closest('[data-track]'); if (t) track(t.dataset.track); });
 const canHover = matchMedia('(hover: hover)').matches;
 const initials = s => s.replace(/[^A-Za-z ]/g,'').split(' ').filter(Boolean).slice(0,2).map(w => w[0]).join('').toUpperCase();
 const avatar = a => a.logo
@@ -398,6 +439,7 @@ chips.addEventListener('click', e => {
   const b = e.target.closest('[data-f]');
   if (!b) return;
   filter = +b.dataset.f;
+  track('gallery_filter', { filter: FILTERS[filter][0] });
   chips.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', c === b));
   document.querySelectorAll('.tile').forEach(t => { t.hidden = !FILTERS[filter][1](ADS[+t.dataset.i]); });
 });
@@ -483,6 +525,7 @@ function render(i){
 }
 function openAd(i, trigger){
   lastFocus = trigger || null;
+  track('video_open', { ad: ADS[i].title });
   grid.querySelectorAll('.tile').forEach(stopLoop);
   render(i);
   vw.classList.add('is-open');
